@@ -11,6 +11,7 @@ function fail () {
 }
 
 function highlight () {
+  echo
   echo "$FAILURE_PREFIX${COLOR_CYAN}${1//${COLOR_RESET}/${COLOR_CYAN}}${COLOR_CLEAR}"
 }
 

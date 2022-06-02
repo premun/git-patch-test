@@ -1,5 +1,6 @@
 FROM vmr-base
 
+# This test case moves a file from included to ignored directory and modifies it
 WORKDIR /work/individual-repo
 RUN mv included/A.txt ignored/A.txt
 RUN echo "Line 7" >> ignored/A.txt
