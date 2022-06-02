@@ -24,3 +24,15 @@ ELF
 EOF
 
 COPY run-test.sh /work
+
+# We additionaly validate that the file was renamed in git
+RUN <<EOF
+cat <<ELF >> /work/run-test.sh
+git -C /work/vmr add -A
+git -C /work/vmr status \
+    | grep 'renamed:' \
+    | grep 'src/individual-repo/included/A.txt -> src/individual-repo/included/C.txt' \
+    || fail "File should have the rename status"
+highlight 'Verified that file was renamed'
+ELF
+EOF
