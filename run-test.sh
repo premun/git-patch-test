@@ -49,3 +49,6 @@ cat /work/patch
 
 highlight "Applying patch.."
 git -C /work/vmr apply /work/patch || fail "Applying the patch failed!"
+
+highlight "VMR after:"
+tree /work/vmr
