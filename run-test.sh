@@ -2,6 +2,8 @@
 
 COLOR_RED=$(tput setaf 1 2>/dev/null || true)
 COLOR_CYAN=$(tput setaf 6 2>/dev/null || true)
+COLOR_CLEAR=$(tput sgr0 2>/dev/null || true)
+COLOR_RESET=uniquesearchablestring
 
 function fail () {
   echo "$FAILURE_PREFIX${COLOR_RED}${1//${COLOR_RESET}/${COLOR_RED}}${COLOR_CLEAR}"
@@ -31,14 +33,14 @@ highlight "Creating patch.."
 sha1=$(cat /work/from_commit)
 sha2=$(cat /work/to_commit)
 
-git -C /work/individual-repo diff       \
-    --patch                             \
-    -U0                                 \
-    --binary                            \
-    --output "/work/patch"              \
-    --src-prefix=a/src/individual-repo/ \
-    --dst-prefix=b/src/individual-repo/ \
-    "$sha1..$sha2"                      \
+git -C /work/individual-repo diff         \
+    --patch                               \
+    -U0                                   \
+    --binary                              \
+    --output "/work/patch"                \
+    --src-prefix=a/src/individual-repo/   \
+    --dst-prefix=b/src/individual-repo/   \
+    "$sha1..$sha2"                        \
     -- . ":(exclude,glob)**/ignored/**/*" \
     || fail "Failed to create patch"
 
