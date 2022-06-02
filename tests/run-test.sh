@@ -39,8 +39,6 @@ git -C /work/individual-repo diff         \
     -U0                                   \
     --binary                              \
     --output "/work/patch"                \
-    --src-prefix=a/src/individual-repo/   \
-    --dst-prefix=b/src/individual-repo/   \
     "$sha1..$sha2"                        \
     -- . ":(exclude,glob)**/ignored/**/*" \
     || fail "Failed to create patch"
@@ -49,7 +47,7 @@ highlight "Patch created:"
 cat /work/patch
 
 highlight "Applying patch.."
-git -C /work/vmr apply /work/patch || fail "Applying the patch failed!"
+git -C /work/vmr apply --directory src/individual-repo/ /work/patch || fail "Applying the patch failed!"
 
 highlight "VMR after:"
 tree /work/vmr
