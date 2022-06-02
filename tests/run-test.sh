@@ -15,9 +15,14 @@ function highlight () {
   echo "$FAILURE_PREFIX${COLOR_CYAN}${1//${COLOR_RESET}/${COLOR_CYAN}}${COLOR_CLEAR}"
 }
 
+sha1=$(cat /work/from_commit)
+sha2=$(cat /work/to_commit)
+
 highlight "Individual repo before:"
 
+git -C /work/individual-repo/ checkout $sha1 >/dev/null 2>&1
 tree /work/individual-repo
+git -C /work/individual-repo/ checkout $sha2 >/dev/null 2>&1
 
 highlight "Individual repo after:"
 
@@ -30,9 +35,6 @@ tree /work/vmr
 set -e
 
 highlight "Creating patch.."
-
-sha1=$(cat /work/from_commit)
-sha2=$(cat /work/to_commit)
 
 git -C /work/individual-repo diff         \
     --patch                               \
