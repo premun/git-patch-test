@@ -53,3 +53,10 @@ git -C /work/vmr apply /work/patch || fail "Applying the patch failed!"
 
 highlight "VMR after:"
 tree /work/vmr
+
+if ! diff /work/expected <(tree /work/vmr); then
+  highlight "Expected:"
+  cat /work/expected
+
+  fail "Outputs differ!"
+fi

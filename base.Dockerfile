@@ -26,6 +26,4 @@ RUN git commit -m "individual repo initial commit"
 # from_commit will hold the commit hash of the commit we will want to create patch from
 RUN echo `git log --format="%H" -n 1` > ../from_commit
 
-
-
 WORKDIR /work

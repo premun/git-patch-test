@@ -1,3 +1,5 @@
+# syntax=docker/dockerfile:1.3-labs
+
 FROM vmr-base
 
 # This test case moves a file from included to ignored directory and modifies it
@@ -9,5 +11,13 @@ RUN git commit -m "Moving modified A.txt from included/ to ignored/"
 RUN echo `git log --format="%H" -n 1` > ../to_commit
 
 WORKDIR /work
+
+RUN <<EOF
+cat <<ELF > /work/expected
+/work/vmr
+
+0 directories, 0 files
+ELF
+EOF
 
 COPY run-test.sh /work
