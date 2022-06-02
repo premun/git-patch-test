@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /work/vmr
+set -e
 
 echo "Applying patch.."
-git apply /work/patch
+git -C /work/vmr apply /work/patch || echo "Patch failed!"

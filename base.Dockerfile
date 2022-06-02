@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:20.04
 
 RUN apt-get update && apt-get install -y git tree
 RUN git config --global user.email "prvysoky@microsoft.com"
@@ -26,5 +26,3 @@ RUN git commit -m "individual repo initial commit"
 RUN echo `git log --format="%H" -n 1` > ../from_commit
 
 WORKDIR /work
-COPY create-patch.sh /work/create-patch.sh
-COPY apply-patch.sh /work/apply-patch.sh

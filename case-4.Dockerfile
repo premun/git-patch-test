@@ -8,3 +8,5 @@ RUN git commit -m "Moving modified A.txt from included/ to ignored/"
 RUN echo `git log --format="%H" -n 1` > ../to_commit
 
 WORKDIR /work
+
+COPY create-patch.sh /work/run-test.sh

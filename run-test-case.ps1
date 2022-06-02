@@ -1,13 +1,17 @@
 [CmdletBinding()]
 param($Case)
 
-Write-Host -ForeGroundColor Green "State before:"
+Write-Host -ForeGroundColor Green "Individual repo before:"
 
 docker run --rm -t vmr-base tree /work/individual-repo
 
-Write-Host -ForeGroundColor Green "State after:"
+Write-Host -ForeGroundColor Green "Individual repo after:"
 
 docker run --rm -t vmr-case-$Case tree /work/individual-repo
+
+Write-Host -ForeGroundColor Green "VMR before:"
+
+docker run --rm -t vmr-case-$Case tree /work/vmr
 
 Write-Host -ForeGroundColor Green "Running the test:"
 
