@@ -1,45 +1,23 @@
+# Use build-containers.ps1 first, then run this script to execute the tests
+
 [CmdletBinding()]
 param($Case)
 
-if ($Case) {
-    Write-Host -ForeGroundColor Green "Test case #$Case"
+function Run-Case {
+    param ($case)
+
+    Write-Host -ForeGroundColor Green "Test case #$case"
+    docker run --rm -t vmr-case-$case /bin/bash /work/run-test.sh
     Write-Host
-    docker run --rm -t vmr-case-$Case /bin/bash /work/run-test.sh
-    exit 0
+    Write-Host
 }
 
-# Use build-containers.ps1 first, then run this script to execute the tests
-
-Write-Host -ForeGroundColor Green "Test case #1"
-Write-Host
-docker run --rm -t vmr-case-1 /bin/bash /work/run-test.sh
-
-Write-Host
-Write-Host
-Write-Host -ForeGroundColor Green "Test case #2"
-Write-Host
-docker run --rm -t vmr-case-2 /bin/bash /work/run-test.sh
-
-Write-Host
-Write-Host
-Write-Host -ForeGroundColor Green "Test case #3"
-Write-Host
-docker run --rm -t vmr-case-3 /bin/bash /work/run-test.sh
-
-Write-Host
-Write-Host
-Write-Host -ForeGroundColor Green "Test case #4"
-Write-Host
-docker run --rm -t vmr-case-4 /bin/bash /work/run-test.sh
-
-Write-Host
-Write-Host
-Write-Host -ForeGroundColor Green "Test case #5"
-Write-Host
-docker run --rm -t vmr-case-5 /bin/bash /work/run-test.sh
-
-Write-Host
-Write-Host
-Write-Host -ForeGroundColor Green "Test case #6"
-Write-Host
-docker run --rm -t vmr-case-6 /bin/bash /work/run-test.sh
+if ($Case) {
+    Run-Case $Case
+    exit $LASTEXITCODE
+}
+else {
+    for ($i = 1; $i -lt 7; $i++) {
+        Run-Case $i
+    }
+}
