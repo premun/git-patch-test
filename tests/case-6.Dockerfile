@@ -17,7 +17,7 @@ cat <<ELF > /work/expected
 \`-- src
     \`-- individual-repo
         \`-- included
-            \`-- C.txt
+            \`-- A.txt
 
 3 directories, 1 file
 ELF
