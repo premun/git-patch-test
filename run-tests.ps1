@@ -1,3 +1,13 @@
+[CmdletBinding()]
+param($Case)
+
+if ($Case) {
+    Write-Host -ForeGroundColor Green "Test case #$Case"
+    Write-Host
+    docker run --rm -t vmr-case-$Case /bin/bash /work/run-test.sh
+    exit 0
+}
+
 # Use build-containers.ps1 first, then run this script to execute the tests
 
 Write-Host -ForeGroundColor Green "Test case #1"
