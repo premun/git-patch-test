@@ -24,3 +24,15 @@ ELF
 EOF
 
 COPY run-test.sh /work
+
+# We do not try to apply the patch as it should be empty
+RUN sed -i '/Patch created/,$d' /work/run-test.sh
+
+# We additionaly validate that the patch is indeed empty
+RUN <<EOF
+cat <<ELF >> /work/run-test.sh
+[[ ! -f /work/patch ]] && fail "Patch file should exist!"
+[[ -s /work/patch ]] && fail "Patch should be empty!"
+highlight 'Verified that patch was empty'
+ELF
+EOF
