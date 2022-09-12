@@ -9,7 +9,7 @@ RUN git config --global user.email "prvysoky@microsoft.com" \
 RUN <<EOF
 cat <<ELF >> /root/.bashrc
 function darc() {
-    /work/arcade-services/.dotnet/dotnet /work/arcade-services/artifacts/bin/Microsoft.DotNet.Darc/Debug/net6.0/Microsoft.DotNet.Darc.dll $@
+    /work/arcade-services/.dotnet/dotnet /work/arcade-services/artifacts/bin/Microsoft.DotNet.Darc/Debug/net6.0/Microsoft.DotNet.Darc.dll "\$@"
 }
 ELF
 EOF
