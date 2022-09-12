@@ -1,0 +1,21 @@
+{
+  "patchesPath": "src/installer/src/SourceBuild/tarball/patches",
+  "defaults": {
+    "defaultRef": "main",
+    "exclude": [
+      "**/*.dll",
+      "**/*.Dll",
+      "**/*.exe",
+      "**/*.pdb",
+      "**/*.mdb",
+      "**/*.zip",
+      "**/*.nupkg"
+    ]
+  },
+  "mappings": [
+    {
+      "name": "individual-repo",
+      "defaultRemote": "https://github.com/premun/individual-repo"
+    }
+  ]
+}

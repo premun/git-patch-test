@@ -9,14 +9,14 @@ RUN git config --global user.email "prvysoky@microsoft.com" \
 RUN <<EOF
 cat <<ELF >> /root/.bashrc
 function darc() {
-    /work/arcade-services/.dotnet/dotnet run --project /work/arcade-services/src/Microsoft.DotNet.Darc/src/DarcLib/Microsoft.DotNet.DarcLib.csproj -- $@
+    /work/arcade-services/.dotnet/dotnet /work/arcade-services/artifacts/bin/Microsoft.DotNet.Darc/Debug/net6.0/Microsoft.DotNet.Darc.dll $@
 }
 ELF
 EOF
 
 RUN mkdir -p /work/vmr \
  && mkdir -p /work/individual-repo \
- && mkdir -p /work/external-repo
+ && mkdir -p /work/tmp/external-repo
 
 WORKDIR /work/individual-repo
 RUN mkdir included \
@@ -37,7 +37,7 @@ RUN mkdir ignored \
  && git commit -m "individual repo initial commit" \
  && echo `git log --format="%H" -n 1` > ../from_commit # from_commit will hold the commit hash of the commit we will want to create patch from
 
-WORKDIR /work/external-repo
+WORKDIR /work/tmp/external-repo
 RUN echo 'This repo will be referenced as a submodule' > a.txt \
  && git init \
  && git add -A \
@@ -53,3 +53,4 @@ RUN echo 'This repo will be referenced as a submodule' > a.txt \
 WORKDIR /work
 
 ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT 1
+ENV DOTNET_SKIP_FIRST_TIME_EXPERIENCE true
