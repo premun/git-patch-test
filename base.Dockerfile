@@ -16,9 +16,7 @@ RUN git config --global user.email "prvysoky@microsoft.com" \
  && git config --global user.name "Premek Vysoky"
 
 RUN mkdir -p /work/vmr \
- && mkdir -p /work/individual-repo \
- && mkdir -p /work/tmp/external-repo \
- && chmod -R 777 /work
+ && mkdir -p /work/individual-repo
 
 WORKDIR /work/individual-repo
 RUN mkdir included \
@@ -38,19 +36,6 @@ RUN mkdir ignored \
  && git add -A \
  && git commit -m "individual repo initial commit" \
  && echo `git log --format="%H" -n 1` > ../from_commit # from_commit will hold the commit hash of the commit we will want to create patch from
-
-WORKDIR /work/tmp/external-repo
-RUN echo 'This repo will be referenced as a submodule' > a.txt \
- && git init -b main \
- && git add -A \
- && git commit -m "Submodule initial commit" \
- && echo '!' >> a.txt \
- && git add -A \
- && git commit -m "Submodule commit with a change" \
- && echo '!' >> a.txt \
- && mkdir src && echo 'New file' >> src/b.txt \
- && git add -A \
- && git commit -m "Submodule commit with a new file"
 
 WORKDIR /work
 
