@@ -17,7 +17,8 @@ RUN git config --global user.email "prvysoky@microsoft.com" \
 
 RUN mkdir -p /work/vmr \
  && mkdir -p /work/individual-repo \
- && mkdir -p /work/tmp/external-repo
+ && mkdir -p /work/tmp/external-repo \
+ && chmod -R 777 /work
 
 WORKDIR /work/individual-repo
 RUN mkdir included \
