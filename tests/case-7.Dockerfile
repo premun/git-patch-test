@@ -1,5 +1,23 @@
 # syntax=docker/dockerfile:1.3-labs
 
+# This test case prepares an empty VMR and several other "individual repositories"
+# The VMR can then ingest these repositories via the darc tooling
+#
+# It is expected that
+#   1. You will share the arcade-services repo as a volume at /arcade-services
+#   2. You will share the .darc settings file as a volume at /root/.darc
+# You can then utilizie pre-prepared commands:
+# initialize - will initialize the VMR with the individual repository
+# update N - will update the individual repository to Nth commit (N=1 is the initial commit)
+#
+# Example usage:
+#   dotnet build D:\github\arcade-services\src\Microsoft.DotNet.Darc\src\Darc\Microsoft.DotNet.Darc.csproj
+#   docker run -v D:\github\arcade-services:/work/arcade-services -v C:\Users\prvysoky\.darc:/root/.darc --rm -it vmr-case-7
+#   initialize
+#   update 2
+#   update 3
+#   update 6
+
 FROM vmr-base
 
 WORKDIR /work/vmr
